@@ -1,0 +1,401 @@
+@import "lesshat";
+
+@bg-color:          darken(white, 5%);
+@fg-color:          lighten(black, 25%);
+@line-size:         5px;
+@letter-size:       @line-size * 5;
+
+*,
+*:before,
+*:after {
+    .box-sizing(border-box);
+}
+
+.clearfix() {
+    &:before,
+    &:after {
+        content: " ";
+        display: table;
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.sentence-container {
+    .clearfix();
+    float: left;
+    margin: @letter-size;
+    padding: @letter-size / 11;
+    background-color: @bg-color;
+
+    .col {
+        float: right;
+    }
+
+    .title {
+        margin: 0 0 1em;
+        width: 100%;
+        font-size: 13px;
+        line-height: 2em;
+        text-align: center;
+        border-bottom: 1px solid #fff;
+    }
+}
+
+.letter {
+    position: relative;
+    display: block;
+    width: @letter-size;
+    height: @letter-size;
+    margin: @letter-size / 3 @letter-size / 6;
+    outline: 1px solid #eee;
+    background-color: @fg-color;
+}
+
+.letter:before,
+.letter:after {
+    position: absolute;
+    display: block;
+    border-color: @bg-color;
+    content: '';
+}
+
+.empty {
+    background-color: @bg-color;
+}
+
+.size(@width: 1, @height: 1) {
+    width: @line-size * @width;
+    height: @line-size * @height;
+}
+
+.border(@top: 0, @right: 0, @bottom: 0, @left: 0) {
+    border-top: solid @line-size * @top @bg-color;
+    border-right: solid @line-size * @right @bg-color;
+    border-bottom: solid @line-size * @bottom @bg-color;
+    border-left: solid @line-size * @left @bg-color;
+}
+
+//  ========================================================================
+//  Letters with a small dot in one corner
+//  ========================================================================
+.corner-dot {
+    &:after {
+        .size(2, 2);
+    }
+
+    &.bottom-left:after {
+        .border(1,1,0,0);
+        left: 0;
+        bottom: 0;
+    }
+
+    &.bottom-right:after {
+        .border(1,0,0,1);
+        right: 0;
+        bottom: 0;
+    }
+
+    &.top-left:after {
+        .border(0,1,1,0);
+        left: 0;
+        top: 0;
+    }
+
+    &.top-right:after {
+        .border(0,0,1,1);
+        right: 0;
+        top: 0;
+    }
+}
+
+//  ========================================================================
+//  Letters looking like pisces
+//  ========================================================================
+.pisces {
+    &.bottom:after {
+        .size(4, 3);
+        .border(1,1,0,0);
+        left: 0;
+        top: @line-size;
+    }
+
+    &.bottom:before {
+        .size(1, 1);
+        .border(0,1,0,0);
+        right: 0;
+        bottom: @line-size
+    }
+
+    &.top:after {
+        .size(4, 3);
+        .border(0,0,1,1);
+        right: 0;
+        top: @line-size;
+    }
+
+    &.top:before {
+        .size(1, 1);
+        .border(0,0,0,1);
+        left: 0;
+        top: @line-size
+    }
+
+    &.right:after {
+        .size(3, 4);
+        .border(1,0,0,1);
+        bottom: 0;
+        left: @line-size;
+    }
+
+    &.right:before {
+        .size(1, 1);
+        .border(0,0,0,1);
+        right: @line-size;
+        top: 0;
+    }
+
+    &.left:after {
+        .size(3, 4);
+        .border(0,1,1,0);
+        top: 0;
+        right: @line-size;
+    }
+
+    &.left:before {
+        .size(1, 1);
+        .border(0,0,0,1);
+        left: @line-size;
+        bottom: 0;
+    }
+}
+
+//  ========================================================================
+//  Letters looking like spiral with a dot in center
+//  ========================================================================
+.spiral {
+    &:before {
+        .size(3,3);
+        .border(1,1,1,1);
+        left: @line-size;
+        top: @line-size;
+    }
+
+    &:after {
+        .size(1, 1);
+        .border(0,0,0,1);
+    }
+
+    &.bottom:after {
+        right: @line-size;
+        bottom: 0;
+    }
+
+    &.top:after {
+        left: @line-size;
+        top: 0;
+    }
+
+    &.right:after {
+        top: @line-size;
+        right: 0;
+    }
+
+    &.left:after {
+        bottom: @line-size;
+        left: 0;
+    }
+}
+
+//  ========================================================================
+//  Letters looking like a pin
+//  ========================================================================
+.pin {
+    &:before {
+        .size(3,3);
+        top: @line-size;
+        left: @line-size;
+    }
+
+    &.top:after,
+    &.bottom:after {
+        .size(1,4);
+        .border(0,1,0,0);
+        left: @line-size * 2;
+    }
+
+    &.bottom:after {
+        bottom: 0;
+    }
+
+    &.left:after,
+    &.right:after {
+        .size(4,1);
+        .border(1,0,0,0);
+        top: @line-size * 2;
+    }
+
+    &.right:after {
+        right: 0;
+    }
+
+    &.top:before,
+    &.bottom:before {
+        .border(1,0,1,0);
+    }
+
+    &.left:before,
+    &.right:before {
+        .border(0,1,0,1);
+    }
+}
+
+//  ========================================================================
+//  Letters with a side dot
+//  ========================================================================
+.side-dot {
+    &.left:after,
+    &.right:after {
+        .size(2,3);
+    }
+
+    &.left:after {
+        .border(1,1,1,0);
+        top: @line-size;
+    }
+
+    &.right:after {
+        .border(1,0,1,1);
+        top: @line-size;
+        right: 0;
+    }
+
+    &.top:after,
+    &.bottom:after {
+        .size(3,2);
+    }
+
+    &.top:after {
+        .border(0,1,1,1);
+        left: @line-size;
+    }
+
+    &.bottom:after {
+        .border(1,1,0,1);
+        left: @line-size;
+        bottom: 0;
+    }
+}
+
+//  ========================================================================
+//  Letters looking like a mail
+//  ========================================================================
+.mail {
+    &.top:before {
+        .size(3,1);
+        .border(1,0,0,0);
+        top: @line-size * 2;
+        left: @line-size;
+    }
+
+    &.top:after {
+        .size(5,1);
+        border-left: @line-size * 2 solid @bg-color;
+        border-right: @line-size * 2 solid @bg-color;
+        top: @line-size;
+    }
+
+    &.bottom:before {
+        .size(3,1);
+        .border(1,0,0,0);
+        bottom: @line-size * 2;
+        left: @line-size;
+    }
+
+    &.bottom:after {
+        .size(5,1);
+        border-left: @line-size * 2 solid @bg-color;
+        border-right: @line-size * 2 solid @bg-color;
+        bottom: @line-size;
+    }
+
+    &.left:before {
+        .size(1,3);
+        .border(0,1,0,0);
+        left: @line-size * 2;
+        top: @line-size;
+    }
+
+    &.left:after {
+        .size(1,5);
+        border-top: @line-size * 2 solid @bg-color;
+        border-bottom: @line-size * 2 solid @bg-color;
+        left: @line-size;
+    }
+
+    &.right:before {
+        .size(1,3);
+        .border(0,1,0,0);
+        right: @line-size * 2;
+        top: @line-size;
+    }
+
+    &.right:after {
+        .size(1,5);
+        border-top: @line-size * 2 solid @bg-color;
+        border-bottom: @line-size * 2 solid @bg-color;
+        right: @line-size;
+    }
+}
+
+//  ========================================================================
+//  Digits
+//  ========================================================================
+.digit {
+    font-style: normal;
+    text-align: center;
+    line-height: @letter-size;
+    color: @bg-color;
+}
+
+.counter {
+    font-style: normal;
+    line-height: @letter-size;
+    text-align: right;
+    background-color: @bg-color;
+    color: @fg-color;
+}
+
+//  ========================================================================
+//  Solved characters
+//  ========================================================================
+.solved(@content: '') {
+    border: 1px solid @fg-color;
+    background-color: @bg-color;
+
+    &:after {
+        position: relative;
+        left: 0;
+        top: 0;
+        bottom: auto;
+        right: auto;
+        width: 100%;
+        height: 100%;
+        border: none;
+        text-align: center;
+        font-style: normal;
+        line-height: @letter-size;
+        content: @content;
+    }
+
+    &:before {
+        display: none;
+    }
+}
